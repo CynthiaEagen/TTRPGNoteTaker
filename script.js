@@ -11,8 +11,11 @@ class Thing {
 const thingArray = [];
 const list = document.getElementById('list'); 
 
+const idView = document.getElementById('id-view');
+const nameView = document.getElementById('name-view');
+const notesView = document.getElementById('notes-view');
+
 function addThing() {
-    console.log("ping");
     let thing = new Thing(
         document.getElementById('name').value,
         document.getElementById('notes').value
@@ -29,12 +32,23 @@ function addThing() {
 }
 
 function viewThing() {
-    let nameView = document.getElementById('name-view');
-    let notesView = document.getElementById('notes-view');
-
+    idView.value = this.id;
     nameView.value = thingArray[this.id].name;
-    notesView.innerHTML = thingArray[this.id].notes; 
+    notesView.value = thingArray[this.id].notes; 
+}
+
+function editThing() {
+    let thing = thingArray[idView.value];
+    thing.name = nameView.value;
+    thing.notes = notesView.value;
+    thingArray[idView.value] = thing;
+
+    let li = document.getElementById(idView.value);
+    li.innerText = thing.name;
 }
 
 const submit = document.getElementById('submit-button');
 submit.addEventListener('click', addThing);
+
+const edit = document.getElementById('edit-button');
+edit.addEventListener('click', editThing);

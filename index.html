@@ -18,14 +18,18 @@
         <div class="row">
             <div id="view-thing" class="col">
                 <h2>View Notes</h2>
+                <input type="hidden" id="id-view" value="">
                 <div class="form-control">
                     <label for="name-view">Name</label>
-                    <input type="text" id="name-view" readonly>
+                    <input type="text" id="name-view">
                 </div>
                 <div class="form-control">
                     <label for="notes-view">Notes</label>
-                    <textarea id="notes-view"></textarea readonly>
-                </div>    
+                    <textarea id="notes-view"></textarea>
+                </div>
+                <div class="form-control">
+                    <button id="edit-button" class="btn btn-success">Edit</button>
+                </div>
             </div>
             <div class="col">
                 <h2>Add Notes</h2>
