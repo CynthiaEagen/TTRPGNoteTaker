@@ -1,0 +1,45 @@
+Purpose: This application will be used to take notes while playing a TTRPG.
+
+Functional Requirements:
+1   - The user must be able to write a note. The note must have the following features:
+        - Title
+        - Type (Person, Place, Thing, Misc)
+        - Body
+        - Custom tags
+
+2   - The app must save the note to be accessed later
+
+3   - The user must be able to search for a note by Title and/or Tags
+
+4   - The user must be able to view notes by Type (NFR1)
+
+5   - While writing a note, you must be able to reference another note using specific syntax. When viewing the note after it is saved, the user must be able to click on that note to view the referenced note
+
+5a  - Clicking on a referenced note must open the note
+
+5b  - Hovering over a referenced note must show a popup blurb showing a portion of the note.
+
+Nonfunctional Requirements:
+
+1   - The app should have a sidebar that has containers/drop down lists for each Type (FR4). These containers should hold the notes of that type
+
+1a  - The app should allow filtering and sorting of the containers
+
+2   - The app should have a main section in the center of the screen for writing and viewing notes
+
+2a  - The main section should include:
+        - Title, single line text box
+        - Type, dropdown menu
+        - Body, fixed size scrollable multiline text box
+        - Tags, single line text box for adding to a list
+
+2b  - The main section should never change in its formatting. When viewing an existing note, the data should populate their respective fields. When adding a note, the fields should be cleared
+
+3   - The app should have a button that allows adding a new note
+
+4   - The app should save the current note when:
+        - The save button is pressed,
+        - The new note button (NFR3) is pressed
+        - The user opens another note
+
+5  - The search results (FR3) must include the notes Title, Type, Tags, and a small portion of the Body
