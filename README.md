@@ -20,9 +20,9 @@ This application will run as a webapp and will run on localhost. This may be exp
 
 5) While writing a note, you must be able to reference another note using specific syntax. When viewing the note after it is saved, the user must be able to click on that note to view the referenced note
 
-    5a  - Clicking on a referenced note must open the note
+5a. Clicking on a referenced note must open the note
 
-    5b  - Hovering over a referenced note must show a popup blurb showing a portion of the note.
+5b. Hovering over a referenced note must show a popup blurb showing a portion of the note.
 
 6) The user must be able to add additional Games to take notes on. A Game is a named collection of notes
 
@@ -30,17 +30,17 @@ This application will run as a webapp and will run on localhost. This may be exp
 
 1) The app should have a sidebar that has containers/drop down lists for each Type (FR4). These containers should hold the notes of that type
 
-    1a  - The app should allow filtering and sorting of the containers
+1a. The app should allow filtering and sorting of the containers
 
 2) The app should have a main section in the center of the screen for writing and viewing notes
 
-    2a  - The main section should include:
+2a. The main section should include:
     - Title, single line text box
     - Type, dropdown menu
     - Body, fixed size scrollable multiline text box
     - Tags, single line text box for adding to a list
 
-    2b  - The main section should never change in its formatting. When viewing an existing note, the data should populate their respective fields. When adding a note, the fields should be cleared
+2b. The main section should never change in its formatting. When viewing an existing note, the data should populate their respective fields. When adding a note, the fields should be cleared
 
 3) The app should have a button that allows adding a new note
 
@@ -53,7 +53,7 @@ This application will run as a webapp and will run on localhost. This may be exp
 
 6) The user must be able to select which Game is open upon opening the app (FR6)
 
-    6a - The user must be able to switch which Game is open from a menu
+6a. The user must be able to switch which Game is open from a menu
 
 # Implementation Notes
 This application will use: SQLite, TypeORM, Node.js, and React.
