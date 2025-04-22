@@ -3,7 +3,7 @@ import { AppDataSource } from "../data-source"
 import { Game } from "../entity/Game"
 
 export async function gameGetAll(req: Request, res: Response) {
-    console.log("-- getAllGames --")
+    console.log("-- GameGetAll --")
     try {
         const gameRepo = AppDataSource.getRepository(Game)
         const games = await gameRepo.find()

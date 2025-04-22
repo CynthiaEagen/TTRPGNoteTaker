@@ -3,7 +3,7 @@ import { AppDataSource } from "../data-source"
 import { Game } from "../entity/Game"
 
 export async function gameGetById(req: Request, res: Response) {
-    console.log("-- getGame --")
+    console.log("-- GameGetById --")
     try {
         const gameId = parseInt(req.params.id)
 
@@ -15,15 +15,15 @@ export async function gameGetById(req: Request, res: Response) {
                 console.log("Success\n")
                 res.send(game)
             } else { // game not found
-                console.log('Game at id ' + req.params.id + ' not found\n')
+                console.log('Game at ID ' + req.params.id + ' not found\n')
                 res.status(404)
-                res.send({status: 'Game at id ' + req.params.id + ' not found'})
+                res.send({status: 'Game at ID ' + req.params.id + ' not found'})
                 return
             }
         } else { // ID is not a number or is less than 0
-            console.log('Invalid id: ' + req.params.id + '\n')
+            console.log('Invalid ID: ' + req.params.id + '\n')
             res.status(400)
-            res.send('Invalid id: ' + req.params.id)
+            res.send('Invalid ID: ' + req.params.id)
         }        
     } catch (err) {
         console.log('Failure: ' + err.message + '\n')
