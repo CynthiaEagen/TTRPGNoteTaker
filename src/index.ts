@@ -7,6 +7,7 @@ AppDataSource.initialize().then(async () => {
 
     const app = express()
     app.use(express.json())
+    
     AppRoutes.forEach(route => {
         app[route.method](route.path, (req: Request, res: Response, next: Function) => {
             route.action(req, res)
@@ -17,6 +18,6 @@ AppDataSource.initialize().then(async () => {
 
     app.listen(3000)
 
-    console.log("Express listening on port 3000")
+    console.log("Express app listening on port 3000")
     
 }).catch(error => console.log(error))
