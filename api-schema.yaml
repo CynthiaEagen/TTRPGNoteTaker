@@ -2,22 +2,16 @@ openapi: 3.0.4
 info:
   title: TTRPGNoteTaker API
   description: Manages collections of notes for a user's table-top roleplaying games
-  version: 0.0.1
+  version: 0.1.0
 servers:
   - url: http://localhost:3000
 paths:
-  /ping:
-    get:
-      summary: Test route
-      responses:
-        '200':
-          description: Will respond 'ping'
   /games:
     get:
-      summary: List all games
+      summary: List all Games
       responses:
         '200':
-          description: A list of games
+          description: A list of Games
           content:
             application/json:
               schema:
@@ -26,9 +20,24 @@ paths:
                   $ref: '#/components/schemas/Game'
         '5XX':
           description: Unexpected error
+    post:
+      summary: Add a new Game
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request, invalid Game data
+        '5XX':
+          description: Unexpected error 
   /games/{id}:
     get:
-      summary: Get a single game by ID
+      summary: Get a single Game by ID
       parameters:
         - name: id
           in: path
@@ -50,6 +59,141 @@ paths:
           description: Game at the specified ID was not found
         '5XX':
           description: Unexpected error
+    put:
+      summary: Updates an existing Game
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '201':
+          description: Updated
+        '400':
+          description: Bad request, invalid Game data
+        '404':
+          description: Game at the specified ID was not found
+        '5XX':
+          description: Unexpected error 
+    delete:
+      summary: Deleted an existing Game
+      responses:
+        '201':
+          description: Deleted
+        '400':
+          description: Bad request. Game ID must be an integer and larger than 0
+        '404':
+          description: Game at the specified ID was not found
+        '5XX':
+          description: Unexpected error 
+  /games/{id}/notes:
+    get:
+      summary: Gets all Notes for a Game
+      parameters:
+        - name: id
+          in: path
+          description: Game ID
+          reqiured: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A list of Notes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Note'
+        '400':
+          description: Bad request. Game ID must be an integer and larger than 0
+        '404':
+          description: Game at the specified ID was not found
+        '5XX':
+          description: Unexpected error
+  /notes:
+    get:
+      summary: Gets all notes, regardless of respective Game
+      responses:
+        '200':
+          description: A list of Notes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Note'
+        '5XX':
+          description: Unexpected error
+    post:
+      summary: Add a new Note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request, invalid Note data
+        '5XX':
+          description: Unexpected error
+  /notes/{id}:
+    get:
+      summary: Get a single Note by ID
+      parameters:
+        - name: id
+          in: path
+          desciption: Note ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A Note object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        '400':
+          description: Bad request. Note ID must be an integer and larger than 0
+        '404':
+          description: Note at the specified ID was not found
+        '5XX':
+          description: Unexpected error
+    put:
+      summary: Updates an existing Note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        '201':
+          description: Updated
+        '400':
+          description: Bad request, invalid Note data
+        '404':
+          description: Note at the specified ID was not found
+        '5XX':
+          description: Unexpected error 
+    delete:
+      summary: Deleted an existing Note
+      responses:
+        '201':
+          description: Deleted
+        '400':
+          description: Bad request. Note ID must be an integer and larger than 0
+        '404':
+          description: Note at the specified ID was not found
+        '5XX':
+          description: Unexpected error 
 components:
   schemas:
     Game:
