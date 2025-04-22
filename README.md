@@ -55,6 +55,8 @@ This application will run as a webapp and will run on localhost. This may be exp
 
 6a. The user must be able to switch which Game is open from a menu
 
+7) When adding tags, the user should be able to hover over an information icon to be told the rules of tags; i.e., tags must be less than a certain number of characters and cannot contain any commas
+
 # Implementation Notes
 This application will use: SQLite, TypeORM, Node.js, and React.
 
@@ -63,4 +65,3 @@ FR1 & FR2:
 
 FR6, NFR6, & NFR6a:
     Each Game will be stored as a separate table.
-
