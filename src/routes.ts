@@ -1,6 +1,7 @@
 import { seedDB } from './controller/SeedDB'
 import { testPing } from './controller/TestPing'
 import { gameGetAll } from './controller/GameGetAll'
+import { gameSave } from './controller/GameSave'
 import { gameGetById } from './controller/GameGetById'
 
 /**
@@ -21,6 +22,11 @@ export const AppRoutes = [
         path: '/games',
         method: 'get',
         action: gameGetAll
+    },
+    {
+        path: '/games',
+        method: 'post',
+        action: gameSave
     },
     {
         path: '/games/:id',
