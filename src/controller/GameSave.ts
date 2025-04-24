@@ -19,6 +19,8 @@ export async function gameSave(req: Request, res: Response) {
         res.send({status: "Game saved"})
     } catch (err) {
         console.log('Failure: ' + err.message + '\n')
+        // TODO: Is there a better way of handling these similar errors?
+        // client side validation will avoid 90% of their use, but still
         if (err.message === "SQLITE_CONSTRAINT: UNIQUE constraint failed: game.name") {
             res.status(400)
             res.send({status: "Name already exists"})
