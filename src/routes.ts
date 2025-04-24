@@ -2,6 +2,7 @@ import { seedDB } from './controller/SeedDB'
 import { testPing } from './controller/TestPing'
 import { gameGetAll } from './controller/GameGetAll'
 import { gameGetById } from './controller/GameGetById'
+import { gameDelete } from './controller/GameDelete'
 
 /**
  * All application routes
@@ -26,5 +27,10 @@ export const AppRoutes = [
         path: '/games/:id',
         method: 'get',
         action: gameGetById
+    }, 
+    {
+        path: '/games/:id',
+        method: 'delete',
+        action: gameDelete
     }
 ]
