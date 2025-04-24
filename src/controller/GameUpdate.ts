@@ -2,18 +2,18 @@ import { Request, Response } from 'express'
 import { AppDataSource } from "../data-source"
 import { Game } from "../entity/Game"
 
-// TODO: Determine and implement expected behavior for deletion of a game that has notes
-// TODO: Should use Name instead of ID?
-export async function gameDelete(req: Request, res: Response) {
-    console.log("-- GameDelete --")
+// TODO: implement updating a game to include new notes
+export async function gameUpdate(req: Request, res: Response) {
+    console.log("-- GameUpdate --")
     try {
         const gameId = parseInt(req.params.id)
         if (!isNaN(gameId) && gameId > 0) {
             const gameRepo = AppDataSource.getRepository(Game)
             if (await gameRepo.existsBy({id: gameId})) { // check if game exists
-                await gameRepo.delete({id: gameId})
+                console.log(req.body)
+                await gameRepo.update({id: gameId}, req.body)
                 console.log("Success\n")
-                res.send({status: "Delete successful"})
+                res.send({status: "Update successful"})
             } else { // game not found
                 console.log('Game at ID ' + req.params.id + ' not found\n')
                 res.status(404)
