@@ -1,18 +1,28 @@
 import { Request, Response } from 'express'
 import { AppDataSource } from "../data-source"
 import { Game } from "../entity/Game"
+import { Note } from "../entity/Note"
 
-// TODO: implement updating a game to include new notes
 export async function gameUpdate(req: Request, res: Response) {
     console.log("-- GameUpdate --")
+    console.log(req.body)
     try {
         const gameId = parseInt(req.params.id)
         if (!isNaN(gameId) && gameId > 0) {
             const gameRepo = AppDataSource.getRepository(Game)
             if (await gameRepo.existsBy({id: gameId})) { // check if game exists
-                console.log(req.body)
-                await gameRepo.update({id: gameId}, req.body)
-                console.log("Success\n")
+                await gameRepo.update({id: gameId}, {name: req.body.name})
+                if (req.body.notes) { // if there are notes, add them to the Notes table
+                    const noteRepo = AppDataSource.getRepository(Note)
+                    const game = await gameRepo.findOneBy({id: gameId})
+                    const newNotes = []
+                    for (let i = 0; i < req.body.notes.length; i++) {
+                        let note = req.body.notes[i]
+                        note.game = game
+                        newNotes.push(note)
+                    }
+                    await noteRepo.insert(newNotes)
+                }
                 res.send({status: "Update successful"})
             } else { // game not found
                 console.log('Game at ID ' + req.params.id + ' not found\n')
