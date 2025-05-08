@@ -3,8 +3,9 @@ import { Game } from "../../entity/Game"
 import { Note } from "../../entity/Note"
 
 //TODO: add input validation here for the notes
-export async function addNotes(notes, game) {
+export async function addNotes(notes: Note[], gamePartial: Partial<Game>) {
     console.log("\n-- HelperAddNotes --")
+    const game = await AppDataSource.getRepository(Game).findOneBy({id: gamePartial.id})
     const noteRepo = AppDataSource.getRepository(Note)
     const newNotes = []
     for (let i = 0; i < notes.length; i++) {
