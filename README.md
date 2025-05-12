@@ -64,4 +64,4 @@ FR1 & FR2:
     The application will use SQLite and TypeORM to facilitate this. Create a Note class with the required attributes and use TypeORM in order to create and manage the data 
 
 FR6, NFR6, & NFR6a:
-    Each Game will be stored as a separate table.
+    Each Game will be stored as an object with a one-to-many relationship with a collection of Notes.
