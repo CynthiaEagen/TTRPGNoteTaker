@@ -68,7 +68,7 @@ paths:
             schema:
               $ref: '#/components/schemas/Game'
       responses:
-        '201':
+        '200':
           description: Updated
         '400':
           description: Bad request, invalid Game data
@@ -79,7 +79,7 @@ paths:
     delete:
       summary: Deleted an existing Game
       responses:
-        '201':
+        '200':
           description: Deleted
         '400':
           description: Bad request. Game ID must be an integer and larger than 0
@@ -175,7 +175,7 @@ paths:
             schema:
               $ref: '#/components/schemas/Note'
       responses:
-        '201':
+        '200':
           description: Updated
         '400':
           description: Bad request, invalid Note data
@@ -186,7 +186,7 @@ paths:
     delete:
       summary: Deleted an existing Note
       responses:
-        '201':
+        '200':
           description: Deleted
         '400':
           description: Bad request. Note ID must be an integer and larger than 0

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { AppDataSource } from "../data-source"
 import { Game } from "../entity/Game"
-import { Note } from "../entity/Note"
+import { addNotes } from './helper_functions/HelperAddNotes'
 
 export async function gameUpdate(req: Request, res: Response) {
     console.log("-- GameUpdate --")
@@ -11,17 +11,12 @@ export async function gameUpdate(req: Request, res: Response) {
         if (!isNaN(gameId) && gameId > 0) {
             const gameRepo = AppDataSource.getRepository(Game)
             if (await gameRepo.existsBy({id: gameId})) { // check if game exists
-                await gameRepo.update({id: gameId}, {name: req.body.name})
+                const newGame = gameRepo.create({id: gameId, name: req.body.name} as Partial<Game>)
+                newGame.validate()
+                await gameRepo.save(newGame)
+                // await gameRepo.update({id: gameId}, {name: req.body.name})
                 if (req.body.notes) { // if there are notes, add them to the Notes table
-                    const noteRepo = AppDataSource.getRepository(Note)
-                    const game = await gameRepo.findOneBy({id: gameId})
-                    const newNotes = []
-                    for (let i = 0; i < req.body.notes.length; i++) {
-                        let note = req.body.notes[i]
-                        note.game = game
-                        newNotes.push(note)
-                    }
-                    await noteRepo.insert(newNotes)
+                    await addNotes(req.body.notes, gameId)
                 }
                 res.send({status: "Update successful"})
             } else { // game not found
@@ -36,8 +31,13 @@ export async function gameUpdate(req: Request, res: Response) {
             res.send('Invalid ID: ' + req.params.id)
         }        
     } catch (err) {
-        console.log('Failure: ' + err.message + '\n')
-        res.status(500)
-        res.send({status: 'Internal server error'})
+        if (err.name == "ValidationError") {
+            res.status(400)
+            res.send({status: err.message})
+        } else {
+            console.log('Failure: ' + err.message + '\n')
+            res.status(500)
+            res.send({status: 'Internal server error'})
+        }
     }
 }

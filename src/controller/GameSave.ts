@@ -18,6 +18,7 @@ export async function gameSave(req: Request, res: Response) {
         }
         
         console.log("Success\n")
+        res.status(201)
         res.send({status: "Game saved"})
     } catch (err) {
         console.log('Failure: ' + err.message + '\n')
