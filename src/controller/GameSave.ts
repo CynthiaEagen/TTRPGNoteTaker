@@ -14,7 +14,7 @@ export async function gameSave(req: Request, res: Response) {
         await gameRepo.save(newGame)
 
         if (req.body.notes) { // if there are notes, add them to the Notes table
-            await addNotes(req.body.notes, newGame)
+            await addNotes(req.body.notes, newGame.id)
         }
         
         console.log("Success\n")
