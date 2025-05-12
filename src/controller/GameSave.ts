@@ -14,10 +14,11 @@ export async function gameSave(req: Request, res: Response) {
         await gameRepo.save(newGame)
 
         if (req.body.notes) { // if there are notes, add them to the Notes table
-            await addNotes(req.body.notes, newGame)
+            await addNotes(req.body.notes, newGame.id)
         }
         
         console.log("Success\n")
+        res.status(201)
         res.send({status: "Game saved"})
     } catch (err) {
         console.log('Failure: ' + err.message + '\n')
