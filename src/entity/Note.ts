@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeInsert, BeforeUpdate } from "typeorm"
 import { Game } from './Game'
 
 /**
@@ -31,9 +31,15 @@ export class Note {
     @Column({
         type: "varchar",
         length: 60,
-        unique: true
     })
     title: string
+
+    @Column({
+        type: "varchar",
+        unique: true,
+        nullable: true
+    })
+    noteUniqueId: string
 
     // must use the NoteType enum options
     @Column("varchar")
@@ -48,5 +54,11 @@ export class Note {
      */
     @Column("simple-array")
     tags: string[]
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    generateUniqueId() {
+        this.noteUniqueId = this.game.id + "-" + this.title
+    }
 
 }

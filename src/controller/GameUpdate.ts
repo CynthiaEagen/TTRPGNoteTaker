@@ -5,7 +5,6 @@ import { addNotes } from './helper_functions/HelperAddNotes'
 
 export async function gameUpdate(req: Request, res: Response) {
     console.log("-- GameUpdate --")
-    console.log(req.body)
     try {
         const gameId = parseInt(req.params.id)
         if (!isNaN(gameId) && gameId > 0) {
@@ -18,6 +17,7 @@ export async function gameUpdate(req: Request, res: Response) {
                 if (req.body.notes) { // if there are notes, add them to the Notes table
                     await addNotes(req.body.notes, gameId)
                 }
+                console.log("Success\n")
                 res.send({status: "Update successful"})
             } else { // game not found
                 console.log('Game at ID ' + req.params.id + ' not found\n')
