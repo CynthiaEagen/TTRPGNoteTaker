@@ -7,12 +7,14 @@ export async function addNotes(notes: Note[], gameId: number) {
     console.log("\n-- HelperAddNotes --")
     const game = await AppDataSource.getRepository(Game).findOneBy({id: gameId})
     const noteRepo = AppDataSource.getRepository(Note)
-    const newNotes = []
     for (let i = 0; i < notes.length; i++) {
-        let note = notes[i]
+        const note = new Note()
         note.game = game
-        newNotes.push(note)
+        note.title = notes[i].title
+        note.type = notes[i].type
+        note.body = notes[i].body
+        note.tags = notes[i].tags
+        noteRepo.save(note)
     }
-    await noteRepo.insert(newNotes)
     console.log("Success\n")
 }
