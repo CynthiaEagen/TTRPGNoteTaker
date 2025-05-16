@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { AppDataSource } from "../data-source"
 import { Game } from "../entity/Game"
 import { Note } from '../entity/Note'
+import { GetGameWithNotes } from './helper_functions/HelperGetGameWithNotes'
 
 export async function gameDelete(req: Request, res: Response) {
     console.log("-- GameDelete --")
@@ -9,19 +10,8 @@ export async function gameDelete(req: Request, res: Response) {
         const gameId = parseInt(req.params.id)
         if (!isNaN(gameId) && gameId > 0) {
             const gameRepo = AppDataSource.getRepository(Game)
-            if (await gameRepo.existsBy({id: gameId})) { // check if game exists
-                // get the game and save it to a new variable
-                const gameResults = await gameRepo.find(
-                    {
-                        relations: {
-                            notes: true
-                        },
-                        where: {
-                            id: gameId   
-                        }
-                    }
-                )
-                const game = gameResults[0] 
+            const game = await GetGameWithNotes(gameId)
+            if (game !== null) {
                 const noteRepo = AppDataSource.getRepository(Note)
                 // if there are notes associated with the game, delete all of them
                 if (game.notes.length > 0) {
