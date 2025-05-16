@@ -5,6 +5,7 @@ import { gameSave } from './controller/GameSave'
 import { gameGetById } from './controller/GameGetById'
 import { gameDelete } from './controller/GameDelete'
 import { gameUpdate } from './controller/GameUpdate'
+import { gameGetNotes } from './controller/GameGetNotes'
 
 /**
  * All application routes
@@ -44,5 +45,10 @@ export const AppRoutes = [
         path: '/games/:id',
         method: 'put',
         action: gameUpdate
+    },
+    {
+        path: '/games/:id/notes',
+        method: 'get',
+        action: gameGetNotes
     }
 ]
