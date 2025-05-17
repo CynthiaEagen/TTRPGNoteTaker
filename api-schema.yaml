@@ -61,6 +61,14 @@ paths:
           description: Unexpected error
     put:
       summary: Updates an existing Game
+      parameters:
+        - name: id
+          in: path
+          desciption: Game ID
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         required: true
         content:
@@ -78,6 +86,14 @@ paths:
           description: Unexpected error 
     delete:
       summary: Deleted an existing Game
+      parameters:
+        - name: id
+          in: path
+          desciption: Game ID
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: Deleted
@@ -114,19 +130,6 @@ paths:
         '5XX':
           description: Unexpected error
   /notes:
-    get:
-      summary: Gets all notes, regardless of respective Game
-      responses:
-        '200':
-          description: A list of Notes
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Note'
-        '5XX':
-          description: Unexpected error
     post:
       summary: Add a new Note
       requestBody:
@@ -142,16 +145,16 @@ paths:
           description: Bad request, invalid Note data
         '5XX':
           description: Unexpected error
-  /notes/{id}:
+  /notes/{noteUniqueId}:
     get:
-      summary: Get a single Note by ID
+      summary: Get a single Note by its unique ID
       parameters:
-        - name: id
+        - name: noteUniqueId
           in: path
-          desciption: Note ID
+          desciption: Note Unique ID
           required: true
           schema:
-            type: integer
+            type: string
             format: int64
       responses:
         '200':
@@ -160,14 +163,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Note'
-        '400':
-          description: Bad request. Note ID must be an integer and larger than 0
         '404':
           description: Note at the specified ID was not found
         '5XX':
           description: Unexpected error
     put:
       summary: Updates an existing Note
+      parameters:
+        - name: noteUniqueId
+          in: path
+          desciption: Note Unique ID
+          required: true
+          schema:
+            type: string
+            format: int64 
       requestBody:
         required: true
         content:
@@ -185,6 +194,14 @@ paths:
           description: Unexpected error 
     delete:
       summary: Deleted an existing Note
+      parameters:
+        - name: noteUniqueId
+          in: path
+          desciption: Note Unique ID
+          required: true
+          schema:
+            type: string
+            format: int64
       responses:
         '200':
           description: Deleted
@@ -197,7 +214,7 @@ paths:
 components:
   schemas:
     Game:
-      type: Object
+      type: object
       properties:
         id:
           type: integer
@@ -206,11 +223,13 @@ components:
         notes:
           type: Note[]
     Note:
-      type: Object
+      type: object
       properties:
         id:
           type: integer
         title:
+          type: string
+        noteUniqueId:
           type: string
         type:
           type: string
