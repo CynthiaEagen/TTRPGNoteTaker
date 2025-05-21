@@ -1,8 +1,64 @@
 # Purpose
-This application will be used to take notes while playing a TTRPG.
+This application will be used to take notes while playing a TTRPG. The application will allow the user to create a sortable, searchable collection of notes for the games they play.
 
 # Platforms
 This application will run as a webapp and will run on localhost. This may be expanded in the future to allow cross-device note taking.
+
+# User Stories
+## Main Story
+As a TTRPG player, I want to be able to write notes on a person, place, thing in the game -- or more miscellaneous note -- with an optional list of tags, so that I can create a sortable, searchable collection of notes that corrospond to different ttrpg games.
+
+### Acceptance Criteria
+1) The user must be able to write the body of a note
+2) Notes must have a title
+
+
+## Story 1
+As a TTRPG player, I want to be able to write and edit notes on a person, place, or thing in the game, as write well as more miscellanious notes, so I can reference them at a later date.
+
+### Acceptance Criteria
+1) The user must be able to write a note
+2) Each note must have a unique title
+    - Each title should be unique only to its game. I.e., Game 1 has a note titled 'Note' and Game 2 has a note also titled 'Note', but neither game can have another note titled 'Note'.
+3) Notes must have one of the following types
+    - Person
+    - Place
+    - Thing
+    - Misc
+4) The notes must be saved and accessible to the user
+5) The notes must be editable
+
+## Story 2
+*Parent: Story 1 AC 4*
+
+As a TTRPG player, I want to be able to see my notes categorized by type, so that I can more easily find the note I'm looking for.
+
+### Acceptance Criteria
+1) The application must display all notes for a game sorted by category
+
+## Story 3
+As a TTRPG player, I want to be able to add tags to my notes so I can search for a note by either its title or its tags, so that I can more easily find the note I'm looking for.
+
+### Acceptance Criteria
+1) Must be able to add custom tags to a note
+2) Must be able to search for a note by title
+3) Must be able to search for a note by tags
+
+## Story 4
+As a TTRPG player, I want to be able to write notes on multiple ongoing games and keep those game's notes separate, so that I can have a single organized repository of notes for any game I play.
+
+### Acceptance Criteria
+1) Must be able to create a game
+2) Each game must have a name
+3) Notes must be separated by the game they belong to
+
+## Story 5
+As a TTRPG player, I want to be able to reference other already created notes within another note using specific syntax, so that I can easily navigate to related information.
+
+### Acceptance Criteria
+1) Must be able to use syntax while writing the note to reference another existing note
+2) The user must be able to click on the reference to pull up the referenced note
+3) Nice-to-have: The user can hover over the reference to pull up a preview of the note without having to open it in full 
 
 # Requirements
 ## Functional Requirements:
