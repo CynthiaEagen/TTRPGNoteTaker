@@ -5,14 +5,6 @@ This application will be used to take notes while playing a TTRPG. The applicati
 This application will run as a webapp and will run on localhost. This may be expanded in the future to allow cross-device note taking.
 
 # User Stories
-## Main Story
-As a TTRPG player, I want to be able to write notes on a person, place, thing in the game -- or more miscellaneous note -- with an optional list of tags, so that I can create a sortable, searchable collection of notes that corrospond to different ttrpg games.
-
-### Acceptance Criteria
-1) The user must be able to write the body of a note
-2) Notes must have a title
-
-
 ## Story 1
 As a TTRPG player, I want to be able to write and edit notes on a person, place, or thing in the game, as write well as more miscellanious notes, so I can reference them at a later date.
 
