@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeInsert, BeforeUpdate } from "typeorm"
 import { Game } from './Game'
+import { ValidationError } from "./ValidationError"
 
 /**
  * The NoteType enum contains the allowed
@@ -20,6 +21,23 @@ export enum NoteType {
  * a Body, and Tags - though the Tags may be empty.
  */
 export class Note {
+
+    /**
+     * Validates the information contained withing the Note
+     * @throws ValidationError 
+     */
+    validate() {
+        // SQLite doesn't enforce varchar length, so we have to enforce it manually 
+        if (this.title.length > 60) {
+            throw new ValidationError("Name greater than 60 characters")
+        }
+        else if (this.title === '') {
+            throw new ValidationError("Name empty")
+        }
+        else if (!(Object.values(NoteType).includes(this.type as NoteType))) {
+            throw new ValidationError("Type not valid")
+        }
+    }
 
     // the Game the Note belongs to
     @ManyToOne(() => Game, (game) => game.notes)

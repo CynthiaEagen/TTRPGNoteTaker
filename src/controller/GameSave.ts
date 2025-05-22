@@ -28,8 +28,7 @@ export async function gameSave(req: Request, res: Response) {
         } else if (err.name == "ValidationError") {
             res.status(400)
             res.send({status: err.message})
-        } 
-        else {
+        } else {
             res.status(500)
             res.send({status: 'Internal server error'})
         }
